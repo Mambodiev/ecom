@@ -1,0 +1,58 @@
+{% load static %}
+{% load i18n %}
+
+
+
+<div class='bg-light py-5 mt-5'>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-md">
+          <h5 class='text-black' >Connect with us</h5>
+          <div class="d-flex justify-content-start mt-3">
+          <a class='mr-3 footer-icon' href="#!"></i><img src="{% static 'fonts/bootstrap-icons/facebook.svg' %}" alt="facebook"></a>
+          <a class='mr-3 footer-icon' href="#!"><img src="{% static 'fonts/bootstrap-icons/twitter.svg' %}" alt="twitter"></a>
+          <a class='mr-3 footer-icon' href="#!"><img src="{% static 'fonts/bootstrap-icons/youtube.svg' %}" alt="youtube"></a>
+          </div>
+          <p class="mt-3 text-muted"> Contact Us: hello@drafttop.com</p>
+          ‎+1-202-555-0143 
+      </div>
+      <div class="col-6 col-md">
+          <h5 class='text-black'>Shop</h5>
+          <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Resource</a></li>
+          <li><a class="text-muted" href="#">Resource name</a></li>
+
+          {% if request.user.is_authenticated %}
+            <li><a class="text-muted" href="#">{% trans "My Profile" %}</a></li>
+            <li><a class="text-muted" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+          {% else %}
+            <li><a class="text-muted" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+            <li><a class="text-muted" href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
+          {% endif %}
+          </ul>
+      </div>
+      <div class="col-6 col-md">
+          <h5 class='text-black'>Company</h5>
+          <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="{% url 'about' %}">{% trans "About us" %}</a></li>
+          <li><a class="text-muted" href="{% url 'privacy_policy' %}">{% trans "Privacy " %}</a></li>
+          <li><a class="text-muted" href="{% url 'terms_of_use' %}">{% trans "Terms of Use" %}</a></li>
+          <li><a class="text-muted" href="{% url 'shipping_returns' %}">{% trans "Shipping " %}</a></li>
+          <li><a class="text-muted" href="{% url 'faq' %}">{% trans "Faq" %}</a></li>
+          </ul>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5 class='text-black mb-3'>Subscribe to Newsletter</h5>
+        <form action="/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control btn-sm" placeholder="Type your email adress here" name="email" >
+            <button type="submit" class="submit  mt-2 text-center btn btn-outline-primary btn-sm">Signup</button>
+        </div>
+        </form>
+        <a href="#" class='text-primary mt-3'>Back to top</a>
+      </div>
+    </div>
+  </div>
+</div>

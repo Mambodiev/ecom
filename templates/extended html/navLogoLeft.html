@@ -1,0 +1,211 @@
+  <!-- nav with logo left -->
+  <div class="sticky-top navbar-light bg-light">
+    <div class="container">
+      <div class="d-flex justify-content-between" >
+        <div class="p-0 d-block d-md-none" id="navbarMenu">
+            <nav class="navbar navbar-expand-md">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>             
+            {% include 'navbar.html' %}
+            </nav>
+        </div>         
+                            
+        <div class="p-0" id="navbarLogo">           
+          <a class="navbar-brand" href="{% url 'home' %}"><img style:width="140px" height="35px" src = "{% static 'images/logo_new.png' %}" alt="LOGO"/></a>
+        </div>
+          
+        <div class="p-0 d-none  d-md-block">
+          <nav class="navbar navbar-expand-md">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>             
+            {% include 'navbar.html' %}
+          </nav>
+        </div>
+
+        <div class="p-0">
+          <!-- icon for mobile -->
+          <div class="row cartIcon">
+                <a class="mr-2 d-block d-md-none" href="{% url 'cart:summary' %}">
+                  <img style:width="18px" height="22px" src = "{% static 'icons/search.svg' %}" alt="My Happy SVG"/>
+                  </a>
+                {% if request.user.is_authenticated %}
+                <a class="mr-2 d-block d-md-none" href="{% url 'profile' %}">
+                  <img style:width="18px" height="22px" src = "{% static 'icons/user-check.svg' %}" alt="My Happy SVG"/>
+                </a>
+                {% else %}
+                <a class="mr-2 d-block d-md-none" href="{% url 'account_login' %}">
+                  <img style:width="18px" height="22px" src = "{% static 'icons/user.svg' %}" alt="My Happy SVG"/>
+                </a>
+                {% endif %}  
+                
+                <a class="mr-2 d-block d-md-none" href="{% url 'cart:summary' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/shopping-cart.svg' %}" alt="My Happy SVG"/><span id="cartItemCount">{{ request|cart_item_count }}</span>
+          </div>
+          <!-- end icon for mobile -->
+
+          <!-- icon for desktop -->
+          <div class="row">
+              <a class="mr-2 d-none  d-md-block" href="{% url 'cart:summary' %}">
+              <img style:width="18px" height="22px" src = "{% static 'icons/search.svg' %}" alt="My Happy SVG"/>
+              </a>
+            {% if request.user.is_authenticated %}           
+              <a class="mr-2 d-none  d-md-block" href="{% url 'profile' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/user-check.svg' %}" alt="My Happy SVG"/>
+              </a>
+            {% else %}
+              <a class="mr-2 d-none  d-md-block" href="{% url 'account_login' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/user.svg' %}" alt="My Happy SVG"/>
+              </a>
+            {% endif %}
+            <a class="mr-2 d-none  d-md-block" href="{% url 'cart:summary' %}">
+            <img style:width="18px" height="22px" src = "{% static 'icons/shopping-cart.svg' %}" alt="My Happy SVG"/><span id="cartItemCount">{{ request|cart_item_count }}</span>
+            </a>
+          </div>
+          <!-- end icon for desktop -->
+        </div>      
+      </div>
+    </div>
+  </div>
+  <!-- end nav with logo left -->
+
+  <!-- nav with logo right on moble device-->
+  <div class="sticky-top navbar-light bg-light">
+    <div class="container">
+      <div class="d-flex justify-content-between" >
+          <div class="p-0 d-block d-md-none" id="navbarMenu">
+            <nav class="navbar navbar-expand-md">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>             
+            {% include 'navbar.html' %}
+            </nav>
+          </div>         
+                                     
+          <div class="p-0 d-none  d-md-block mx-0">
+            <nav class="navbar navbar-expand-md">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>             
+            {% include 'navbar.html' %}
+            </nav>
+          </div>
+
+          <!-- end logo for pc -->
+          <div class="p-0 d-none  d-md-block" id="navbarLogoMidle">           
+            <a class="navbar-brand" href="{% url 'home' %}"><img style:width="140px" height="35px" src = "{% static 'images/logo_new.png' %}" alt="LOGO"/></a>
+          </div>
+          <!-- end logo for pc -->
+
+          <div class="p-0">
+            <!-- icon for mobile -->
+            <div class="row cartIconLogoMidle">
+              <a class="mr-2 d-block d-md-none" href="{% url 'cart:summary' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/search.svg' %}" alt="My Happy SVG"/>
+                </a>
+              {% if request.user.is_authenticated %}
+              <a class="mr-2 d-block d-md-none" href="{% url 'profile' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/user-check.svg' %}" alt="My Happy SVG"/>
+              </a>
+              {% else %}
+              <a class="mr-2 d-block d-md-none" href="{% url 'account_login' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/user.svg' %}" alt="My Happy SVG"/>
+              </a>
+              {% endif %}  
+              
+              <a class="mr-2 d-block d-md-none" href="{% url 'cart:summary' %}">
+              <img style:width="18px" height="22px" src = "{% static 'icons/shopping-cart.svg' %}" alt="My Happy SVG"/><span id="cartItemCount">{{ request|cart_item_count }}</span>
+            </div>
+            <!-- end icon for mobile -->
+
+            <!--icon for desktop -->
+            <div class="row">
+              <a class="mr-2 d-none  d-md-block" href="{% url 'cart:summary' %}">
+              <img style:width="18px" height="22px" src = "{% static 'icons/search.svg' %}" alt="My Happy SVG"/>
+              </a>
+            {% if request.user.is_authenticated %}           
+              <a class="mr-2 d-none  d-md-block" href="{% url 'profile' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/user-check.svg' %}" alt="My Happy SVG"/>
+              </a>
+            {% else %}
+              <a class="mr-2 d-none  d-md-block" href="{% url 'account_login' %}">
+                <img style:width="18px" height="22px" src = "{% static 'icons/user.svg' %}" alt="My Happy SVG"/>
+              </a>
+            {% endif %}
+            <a class="mr-2 d-none  d-md-block" href="{% url 'cart:summary' %}">
+            <img style:width="18px" height="22px" src = "{% static 'icons/shopping-cart.svg' %}" alt="My Happy SVG"/><span id="cartItemCount">{{ request|cart_item_count }}</span>
+            </a>
+            </div>
+          <!-- end icon for desktop -->
+          </div>  
+          
+          <!-- logo for mobile -->
+          <div class="p-0 d-block d-md-none" id="">           
+            <a class="navbar-brand" href="{% url 'home' %}"><img style:width="140px" height="35px" src = "{% static 'images/logo_new.png' %}" alt="LOGO"/></a>
+          </div>
+          <!-- end logo for mobile -->
+      </div>
+    </div>
+  </div>
+
+<!-- end nav with logo right on moble device-->
+
+
+<!-- comment with two column -->
+  <div class="container">
+        <div class="row">
+                        {% for comment in product.comment_set.all %}
+                        <div class="col-md-6 col-equal">
+                          <div class="col bg-light p-3">
+                            <div class="d-flex justify-content-between">
+                              <div class="p-2">
+                                <img class="profile-pic" src="{% static 'images/demo/index2-slide-1.jpg' %}">
+                              </div>
+                              <div class="p-2">
+                                <h4 class="">{{ comment.user.first_name }} </h4>
+                              </div>
+                              <div class="p-2">
+                                <p class="text-muted">{{ comment.create_at}}</p>
+                              </div>
+                            </div>      
+                            <div>
+                              <div class="review-rating">
+                                <i class="icon-star{% if comment.rate < 1 %}-o empty{% endif %}"></i>
+                                <i class="icon-star{% if comment.rate < 2 %}-o empty{% endif %}"></i>
+                                <i class="icon-star{% if comment.rate < 3 %}-o empty{% endif %}"></i>
+                                <i class="icon-star{% if comment.rate < 4 %}-o empty{% endif %}"></i>
+                                <i class="icon-star{% if comment.rate < 5 %}-o empty{% endif %}"></i>
+                              </div>
+                            </div>
+                            <h4 class="blue-text mt-3">"{{ comment.subject }}"</h4>
+                            <p class="content">
+                              {{ comment.comment }}
+                            </p>
+                          </div> <br>
+                        
+                        </div>
+                        {% endfor %}
+        </div>
+  </div> 
+<!-- end comment with two column -->
+
+<!-- icon for mobile -->
+  <div class="row cartIcon">
+          <a class="mr-2 d-block d-md-none" href="{% url 'cart:summary' %}">
+          <img style:width="18px" height="22px" src = "{% static 'icons/search.svg' %}" alt="My Happy SVG"/>
+          </a>
+          {% if request.user.is_authenticated %}
+          <a class="mr-2 d-block d-md-none" href="{% url 'profile' %}">
+          <img style:width="18px" height="22px" src = "{% static 'icons/user-check.svg' %}" alt="My Happy SVG"/>
+          </a>
+          {% else %}
+          <a class="mr-2 d-block d-md-none" href="{% url 'account_login' %}">
+          <img style:width="18px" height="22px" src = "{% static 'icons/user.svg' %}" alt="My Happy SVG"/>
+          </a>
+          {% endif %}  
+              
+          <a class="mr-2 d-block d-md-none" href="{% url 'cart:summary' %}">
+          <img style:width="18px" height="22px" src = "{% static 'icons/shopping-cart.svg' %}" alt="My Happy SVG"/><span id="cartItemCount">{{ request|cart_item_count }}</span>
+  </div>
+<!-- end icon for mobile -->

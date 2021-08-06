@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+<!-- {% load blog_tags %} -->
+{% load i18n %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+
+    <div class="container">
+      <div class="row justify-content-center">
+
+          <div class="col-lg-8"><br><br>
+            {% if query %}
+            <h3>Products matching<span class="badge  text-info"><span class="text-success">"{{ query }}"</span></span></h3><br>
+            <h4>
+              {% with results.count as total_results %}
+                  Found <span class="text-success">{{ total_results }}</span> result{{ total_results|pluralize }}
+              {% endwith %}
+            </h4><br>
+
+            {% for product in results %}
+            
+            
+            <a href="{{ product.get_absolute_url }}">
+            <div class="container shadow p-3 mb-5 bg-white rounded">
+              <div class="row">
+                <div class="col-2"><img src="{{ product.featured.url }}" class="img-fluid" style="max-width: 90px;"></div>
+                <div class="col-10">
+                  <h1 class="font-weight-bold text-black">{{ product.title }}</h1>
+                  <h3>${{ product.get_price }}</h3>
+                </div>
+              </div>
+            </div>
+            </a>
+            {% empty %}
+              <p>There are no results for your query.</p>
+            {% endfor %}
+            <h3 class=" text-info font-weight-normal"><a href="{% url 'cart:product_search' %}">Search again</a></h3><br>
+          {% else %}
+            <!-- <h5>Search for products</h5> -->
+            <h1 class="font-weight-bold text-black">Search for products</h1><br>
+            <form method="get">
+              {{ form }}
+              <input type="submit" value="Search">
+            </form><br><br>
+            {% endif %}
+          </div>
+
+      </div>
+    
+  
+</div>
+{% endblock %}

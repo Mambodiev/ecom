@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load blog_tags %}
+{% block content %}
+
+<div class="container">
+  <div class="bg-white py-3">
+      <div class="row">
+          <div class="col-md-12 mb-0">
+              <a href="{% url 'home' %}">{% trans "Home" %}</a>
+              <span class="mx-2 mb-0">/</span>
+              <strong class="text-black">{{ product.title }}</strong>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+        <img id="featured" src="{{product.featured.url}}" class="img-fluid">   
+        <div class="justify-content-md-center" id="slide-wrapper">
+          <img id="slideLeft" class="arrow" src = "{% static 'fonts/bootstrap-icons/chevron-left.svg' %}" alt="chevron-left"/>
+          <div id="slider">
+            {% for image in product.image_set.all %}
+            <img class="thumbnail" src="{{image.imageURL}}">
+            {% endfor %}
+          </div>
+          <img id="slideRight" class="arrow" src = "{% static 'fonts/bootstrap-icons/chevron-right.svg' %}" alt="chevron-right"/>
+        </div>
+    </div> 
+          
+    <div class=" col-sm-6">
+      <h1 class="text-black">{{ product.title }}</h1><br>
+      <div class="product">
+        <div class="product-rating  float-left" id="product-rating">
+          <i class="icon-star{% if product.avaregereview < 1%}-o empty{% endif%}"></i>
+          <i class="icon-star{% if product.avaregereview < 2%}-o empty{% endif%}"></i>
+          <i class="icon-star{% if product.avaregereview < 3%}-o empty{% endif%}"></i>
+          <i class="icon-star{% if product.avaregereview < 4%}-o empty{% endif%}"></i>
+          <i class="icon-star{% if product.avaregereview < 5%}-o empty{% endif%}"></i>
+          <span class='ml-3'>{{ product.avaregereview |stringformat:".2f"}}<span>
+        </div>
+
+        <div class="d-flex justify-content-around pl-3">
+          <a href="#tab1">{{ product.countreview}}  {% trans "Review(s) / Add Review" %}</a>
+        </div>
+      </div><br><br>
+
+      <h3>
+        US  ${{ product.get_price }}
+        <del><small class="text-muted ml-3">$113</small><del>
+      </h3><br><hr>
+
+      <h5 class='text-muted'>
+        {% trans 'Available stock:' %} {{ product.stock }} {% trans 'Units' %}
+      </h5><br>
+      {% if product.in_stock %}
+
+      <form method="POST">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="col-4 col-sm-3">
+              {{ form.colour|as_crispy_field }}
+            </div>
+            <div class="col-4 col-sm-3" id="qty">
+              {{ form.size|as_crispy_field }}
+            </div>            
+          </div>
+          <div class="form-row">
+            <div class="col-2 col-sm-3">
+              {{ form.quantity|as_crispy_field }}
+            </div>
+            <div class="col-10 col-sm-9">
+              <button type="submit" class="btn btn-primary btn-sm btn-block addtocart" id="addtocart">{% trans "Add to cart" %}</button>
+            </div>
+          </div>
+      </form><br>
+
+      {% else %}
+      <h5>
+        {% trans 'This item is out of stock' %}
+      </h5>
+      {% endif %}
+    </div>
+  </div><br><br>
+
+  <!-- comment-->
+    <h4 class="CustomerReview text-center">{% trans "Customer Reviews" %}</h4>
+    <div class="clearfix">
+      <div class="product float-left">
+          <div class="product-rating" id="product-rating">
+            <i class="icon-star{% if product.avaregereview < 1%}-o empty{% endif%}"></i>
+            <i class="icon-star{% if product.avaregereview < 2%}-o empty{% endif%}"></i>
+            <i class="icon-star{% if product.avaregereview < 3%}-o empty{% endif%}"></i>
+            <i class="icon-star{% if product.avaregereview < 4%}-o empty{% endif%}"></i>
+            <i class="icon-star{% if product.avaregereview < 5%}-o empty{% endif%}"></i>
+            {% trans "Reviews" %} ({{ product.avaregereview |stringformat:".2f"}})
+          </div><br>
+      </div>
+      <div class="float-right mb-3">
+        <a class="btn btn-primary btn-sm btn-block"  data-toggle="collapse" href="#reviewForm" id="writeReview">{% trans "Write Review" %} 
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+          <div class="demo-content">
+            <div class="collapse" id="reviewForm">
+              <form class="review-form" 
+                action="/cart/addcomment/{{ product.id }}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="sr-only" for="reviewEmail">{% trans "subject" %}:</label>
+                      <input class="form-control form-control-sm" name="subject" type="text" placeholder="Your subject" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label class="sr-only" for="reviewText">{% trans "Review" %}:</label>
+                    <textarea class="form-control form-control-sm" name="comment" rows="5" placeholder="Your review " required></textarea>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-md-12 d-flex justify-content-between"> 
+                    
+                      <div class="form-group">
+                        <div class="input-rating">
+                            <strong class="">{% trans "Please rate" %}: </strong>
+                            <div class="stars">
+                                <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+                                <input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+                                <input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+                                <input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+                                <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
+                            </div>
+                        </div>
+                      </div>
+                    
+                    <div class="d-flex justify-content-between">
+                      {% if user.id is not None %}
+                      <button class="btn btn-primary btn-sm btn-block" type="submit" id="postReview">
+                        {% trans "Post Review" %}
+                      </button>
+                      {% else %}
+                      {% trans "You must be logged in to post a review" %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <br>
+          </div>
+      </div>
+    </div>    
+
+    {% for comment in product.comment_set.all %}
+      {% if comment.approved %}
+        <div class="media">
+          <img src="{% static 'images/profile/blank-profile-picture-973460_1280.png' %}" class="mr-3 rounded" alt="Sample Image">
+          <div class="media-body">
+            <div class="clearfix">
+              <div class="float-left review-rating">
+                  <i class="icon-star{% if comment.rate < 1 %}-o empty{% endif %}"></i>
+                  <i class="icon-star{% if comment.rate < 2 %}-o empty{% endif %}"></i>
+                  <i class="icon-star{% if comment.rate < 3 %}-o empty{% endif %}"></i>
+                  <i class="icon-star{% if comment.rate < 4 %}-o empty{% endif %}"></i>
+                  <i class="icon-star{% if comment.rate < 5 %}-o empty{% endif %}"></i>
+              </div>
+            </div><br>
+              <p>
+                {{ comment.comment }}
+              </p>
+              <h5 class="mt-0">
+                Jhon Carter 
+                <small>
+                  <i>
+                    {% trans 'Posted on' %} {{ comment.create_at }}' 
+                  </i>
+                </small>
+              </h5>
+          </div>
+        </div><hr><br>
+      {% endif %}
+    {% endfor %}   
+  <!-- end comment -->
+
+
+  <!-- most you may also want -->
+  <section class="pt-0">
+    <h4 class="CustomerReview text-center my-5">{% trans "You may also want" %}</h4>
+      {% show_latest_products %}          
+  </section>
+  <!-- end most you may also want -->
+</div> 
+
+
+<script>
+
+let thumbnails = document.getElementsByClassName('thumbnail')
+			let activeImages = document.getElementsByClassName('active')
+			for (var i=0; i < thumbnails.length; i++){
+				thumbnails[i].addEventListener('mouseover', function(){
+
+					if (activeImages.length > 0){
+						activeImages[0].classList.remove('active')
+					}
+				
+					this.classList.add('active')
+					document.getElementById('featured').src = this.src
+				})
+
+
+			}
+
+			const buttonRight = document.getElementById('slideRight');
+			const buttonLeft = document.getElementById('slideLeft');
+
+
+			buttonRight.addEventListener('click', function(){
+				document.getElementById('slider').scrollLeft += 180;
+		    })
+
+
+
+		    buttonLeft.addEventListener('click', function(){
+		      document.getElementById('slider').scrollLeft -= 180;
+		    })
+</script>
+{% endblock content %}

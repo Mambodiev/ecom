@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+<div class="container">
+    <div class="bg-white py-3">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'home' %}">{% trans "Home" %}</a>
+                <span class="mx-2 mb-0">/</span>
+                <strong class="text-black">{% trans "Staff Page" %}</strong>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12"> 
+            <ul class="list-inline ">
+                <li class="list-inline-item mr-4">
+                    <a class='text-primary text-decoration-none'href="{% url 'staff:product-list' %}"><h4>All Products</h4></a>
+                </li>
+                <li class="list-inline-item mr-4">
+                    <a class='text-primary text-decoration-none'href="{% url 'staff:product-create' %}"><h5>Create a product</h5></a>
+                </li>
+                <li class="list-inline-item">
+                    <h5 class="">Recent orders</h5>
+                </li>
+            </ul>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr>
+                            <th>Reference No.</th>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Payment Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td><a href="{% url 'cart:order-detail' order.pk %}">#{{ order.reference_number }}</a></td>
+                            <td>{{ order.ordered_date }}</td>
+                            <td>{{ order.user.email }}</td>
+                            <td>${{ order.get_total }}</td>
+                            <td>{% if order.ordered %}Paid{% else %}Not paid{% endif %}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4">You haven't made any orders</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if page_obj.has_other_pages %}
+                <ul class="list-inline text-center">
+                    {% if page_obj.has_previous %}
+                        <li class="list-inline-item page"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                        <li class="list-inline-item disabled page"><span class="page-link">&laquo;</span></li>
+                    {% endif %}
+                    
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="list-inline-item active page ">
+                                <span class='page-item page-link active'>
+                                {{ i }}
+                                    <span class='sr-only'>(current)</span>
+                                </span></li>
+                            {% else %}
+                                <li class="list-inline-item page"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="list-inline-item page"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                        <li class="list-inline-item disabled page"><span class="page-link">&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

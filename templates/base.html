@@ -1,0 +1,143 @@
+﻿{% load static %}
+{% load i18n %}
+{% load cart_template_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {% block title %}Online Ecommerce{% endblock title %}
+    </title>
+    <meta>
+      {% block description %} {{ setting.description }} {% endblock %}
+    </meta>
+    <meta>
+      {% block keywords %} {{ setting.keywords }} {% endblock %}
+    </meta>
+    <meta name="description" content="Behold My Awesome Project!">
+    <meta name="author" content="Diev Mambo">
+    {% block extra_head %}
+    {% endblock %}
+    
+    <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+
+    {% block css %}
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link  rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Your stuff: Third-party CSS libraries go here -->
+    <!-- This file stores project-specific CSS -->
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% endblock %}
+  </head>
+
+
+<div class="sticky-top">
+ 
+</div> 
+
+
+<div class='container'>
+  <div class="d-flex justify-content-between">
+    <div class="py-2">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner text-black text_nav">
+          <div class="carousel-item active">
+            <h5>{% trans "Free Worldwide Shipping" %}</h5>
+          </div>
+          <div class="carousel-item">
+            <h5>{% trans "Secure Online Payment" %}</h5>
+          </div>
+          <div class="carousel-item">
+            <h5>{% trans "We return money within 30 days" %}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% get_current_language as LANGUAGE_CODE %}
+    <form action="{% url 'change_language' %}" method="post" class="language">
+      {% csrf_token %}
+      <input class="form-control"  name="next" type="hidden" value="{{ request.get_full_path }}" />
+      <select name="language" class="selectpicker mt-2">
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+          {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+              <h5>{{ language.name_local}}</h5>
+              {% comment %} <h5>{{ language.name_local|slice:":2" }}</h5> {% endcomment %}
+            </option>
+          {% endfor %}
+      </select>
+    </form>
+  </div>
+</div>
+
+<div class="container"> 
+  <div class="d-flex justify-content-between" >
+    <div class="d-block d-md-none" id="navbarMenu">
+      <nav class="navbar navbar-expand-md navbar-light bg-white">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        {% include 'navbar.html' %}
+      </nav>
+    </div>
+
+    <a class="navbar-brand text-uppercase" href="{% url 'home' %}">ecom</a>
+
+    <div class="d-none d-md-block">
+      <nav class="navbar navbar-expand-md navbar-light bg-white">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        {% include 'navbar.html' %}
+      </nav>
+    </div>
+    
+    <ul class="list-inline icon-nav">
+      <li class="list-inline-item">
+        <a href="#">
+          <img src="{% static 'fonts/bootstrap-icons/search.svg' %}" alt="Bootstrap" width="22" height="22">
+        </a>
+      </li>
+      <li class="list-inline-item">
+      <a href="{% url 'cart:summary' %}">
+          <img src="{% static 'fonts/bootstrap-icons/handbag.svg' %}" alt="Bootstrap" width="22" height="22"><span class="badge badge-pill badge-danger cart-count">{{ request|cart_item_count}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+    {% if messages %}
+      {% for message in messages %}
+      <div class="container">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show sticky-top" role="alert">
+          <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+          <span class="alert-inner--text">{{ message }}</span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% include 'footer.html' %}
+{% block modal %}{% endblock modal %}
+{% include 'scripts.html' %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+
+
+</body>
+</html>

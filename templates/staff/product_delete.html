@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <div class="bg-white py-3">
+        <div class="row">
+            <div class="col-md-12">
+                <a class='text-dark text-decoration-none' href="{% url 'home' %}">{% trans "Home" %}</a>
+                <span class="mx-2 mb-0">/</span>
+                <strong class="text-black">{% trans "Delete a product" %}</strong>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type='submit' class='btn btn-primary'>Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

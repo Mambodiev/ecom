@@ -1,0 +1,409 @@
+/* These styles are generated from project.scss. */
+
+.alert-debug {
+  color: black;
+  background-color: white;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+
+/* nav bar */
+.navbar {
+  padding: .5rem 0rem!important;
+}
+.navbar-brand{
+  font-size: 22px;
+  padding-top: .5rem!important;
+}
+.navbar-toggler{
+  font-size: 1.25rem!important;
+  border: none;
+  padding: .25rem 0rem!important;
+  z-index: 9998!important;
+  position: relative;
+}
+.icon-nav{
+  margin-top: .8rem!important;
+}
+@media only screen and (max-width: 768px){
+  .navbar{
+    padding: .0rem 0rem!important;
+    margin-top: .4rem;
+  }
+  #navbarMenu{
+    width: 25%!important;
+  }
+  
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+  min-width: 100%;
+}
+@media screen and (min-width: 800px) {
+  .nav-link:hover{
+    background: #939393!important;
+    color: #fff!important;
+  }
+  .dropdown-item:hover{
+    padding: .5rem .5rem;
+    color: #fff!important;
+    background: #939393!important;
+  }
+}
+
+.dropdown-menu {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: 100% !important;
+  width: 100px !important;
+}
+
+.cart-count{
+  position: relative;
+  left: -7px;
+  bottom: 10px;
+  font-weight: 700;
+  font-family: sans-serif;
+  font-size: 15px;
+  color: #fff;
+  background-color: #007bff;
+  border: 2px solid #fff;
+  padding: 3px;
+  width: 22px;
+  height: 24px;
+  text-align: center;
+
+}
+/* end nav bar */
+
+/* footer */
+.footer-icon{
+  width: 22px;
+  height:22px;
+}
+.visa{
+  margin-right: -0.8em!important;
+}
+.payment-img{
+  width:80px;
+  height:50px;
+}
+
+@media only screen and (max-width: 768px){
+  .payment-img{
+    width: 50px!important;
+    height:40px!important;
+  }
+}
+
+/* paginator */
+.page-link{
+  border-radius: 50%!important;
+}
+.page-link.active{
+  background-color: #007bff!important;
+  color: #fff;
+}
+.page{
+  margin-right: 0rem!important;
+
+}
+
+/* category */
+.category{
+  border-bottom: 1px solid #dee2e6!important;
+}
+
+/* product img */
+#featured {
+  object-fit: cover;
+  cursor: pointer;
+}
+.img {
+  max-width: 100%;
+}
+.bs-example {
+  margin: 20px;
+}
+#slide-wrapper {
+  display: flex;
+  min-height: 100px;
+  align-items: center;
+}
+.arrow {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: .3s;
+}
+#slider {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+}
+.slide {
+  /* overflow:hidden; */
+  overflow-y: auto;
+
+}
+.thumbnail{
+  object-fit: cover;
+  max-width: 90px;
+  max-height: 80px;
+  cursor: pointer;
+  opacity: 0.5;
+  margin: 0 5px 5px 0;
+}
+.thumbnail:hover{
+  opacity:1;
+}
+
+.active{
+  opacity: 1;
+}
+#slider::-webkit-scrollbar {
+  display: none;
+
+}
+/* end product img */
+
+/* add to cart */
+#addtocart {
+  height: calc(2.3rem + 2px);
+  margin-top: 2.3em;
+}
+/* end add to cart */
+
+/* form control */
+.form-control {
+  display: block;
+  width: 100%;
+  height:calc(1.3rem + 1rem + 2px);
+  padding: 0.5rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: 1px solid black;
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+  .form-control:active, .form-control:focus {
+    border-color: #1f4f7c; }
+  .form-control:hover, .form-control:active, .form-control:focus {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important; }
+
+
+/* crispy-forms */
+.asteriskField {
+  display: none;
+}
+/* end crispy-forms */
+
+
+/*-- review form --*/
+@media only screen and (max-width: 769px){
+  #postReview{
+    height: 2rem!important;
+    width: 150px!important;
+  }
+}
+
+.review-form textarea.input {
+  height: 90px;
+}
+
+.review-form .input-rating .stars {
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'icomoon';
+}
+
+
+
+
+.review-form .input-rating .stars input[type="radio"] {
+  display: none;
+}
+
+.review-form .input-rating .stars>label {
+  float: right;
+  cursor: pointer;
+  padding: 0px 3px;
+  margin: 0px;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.review-form .input-rating .stars>label:hover, .review-form .input-rating .stars>label:hover~label {
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+}
+
+.review-form .input-rating .stars>label:before {
+  content: "\f006";
+  /* font-family: FontAwesome; */
+  font-style: normal;
+  font-weight: normal;
+  color: #DADADA;
+  font-size: 14px;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.review-form .input-rating .stars>label:hover:before, .review-form .input-rating .stars>label:hover~label:before {
+  content: "\f005";
+  color: #FFB656;
+}
+
+.review-form .input-rating .stars>input:checked label:before, .review-form .input-rating .stars>input:checked~label:before {
+  content: "\f005";
+  color: #FFB656;
+}
+
+
+
+
+.rating {
+  float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+ follow these rules. Every browser that supports :checked also supports :not(), so
+ it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+  clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+  float:right;
+  width:1em;
+  padding:0 .1em;
+  overflow:hidden !important;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:200%;
+  line-height:1.2;
+  color:#ddd;
+  text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+  content: '★ ';
+}
+
+.rating > input:checked ~ label {
+  color: #f70;
+  text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: gold;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #ea0;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+  position:relative;
+  top:2px;
+  left:2px;
+}
+
+#productRating > i.empty {
+  color: rgb(218, 218, 218) !important;
+}
+.product .product-rating>i {
+  color: #FFB656;
+}
+
+.product .product-rating>i.empty {
+  color: #DADADA;
+}
+
+.review-rating {
+  display: inline-block;
+}
+
+.review-rating>i {
+  color: #FFB656;
+}
+
+.review-rating>i.empty {
+  color: #DADADA;
+}
+.media img{
+  width: 80px;
+}
+
+@media only screen and (max-width: 769px){
+  #postReview{
+    height: 2rem!important;
+    width: 150px!important;
+  }
+}
+/* end review */
+
+/* change language */
+.selectpicker {
+  font-size: 1.25rem;
+  border: 1px solid #939393; 
+  border-radius: 50px;
+}
+.selectpicker, input:focus{
+  outline: none!important;
+  list-style:none!important;
+  background: white; 
+}
+.selectpicker:hover {
+  border: 2px solid #92a8d1;
+}
+
+.modal-content {
+  margin-top: 5rem!important;
+}
+/* end change language */
+
+/* #third{
+  background: url("/static/images/slider/bg.jpg") 100% 0 no-repeat fixed;
+  } */
+#third {
+  width: 100%;
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  overflow: hidden;
+  background-attachment: scroll;
+}
+#third{
+min-height:430px;
+}
+
+
+.img, figure {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}

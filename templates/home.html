@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+<!--carousel-->
+<section id="third" >
+  <div id="carouselExampleCaptions" class="carousel slide carousel-fade"   data-ride="carousel">
+    <ol class="carousel-indicators">
+    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" id="third carouselExampleInterval">
+      {% for carousel in carousel %}
+      <div class="carousel-item {% if forloop.counter0 == 0%} 
+      active {% endif %}" data-interval="5000" >
+        <div class="item">
+          <div class="container padding-top-3x">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
+                <div class="from-bottom"><img class="d-inline-block w-150 mb-4  logo_slider" src="{{carousel.carousel_logo_slider.url }}" alt="Puma">
+                  <div class="h2 text-body text-normal mb-2 pt-1">{{ carousel.carousel_title }}</div>
+                  <div class="p text-body text-normal mb-4 pb-1">{{ carousel.carousel_sub_title }}</div>
+                </div><a class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true" href="{% url 'cart:product-list' %}">{{ carousel.carousel_action }}</a>
+              </div>
+              <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto 
+               " src="{{carousel.carousel_image.url }}" alt="Puma Backpack"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">{% trans "Previous" %}</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">{% trans " Next" %}</span>
+    </a>
+  </div>
+</section><br><br>
+<!--end carousel-->
+
+
+
+    <!-- latest products -->
+    <section class="pt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center mb-3">
+            <h2>{% trans "Latest Products" %}</h2>
+          </div>
+        </div>
+        <div class="row gutter-2 gutter-md-3">
+          {% for product in products_latest %}
+          <div class="col-6 col-lg-3 text-center">
+            <div class="product">
+              <figure class="product-image">
+                <a href="{{ product.get_absolute_url }}">
+                  <img src="{{ product.featured.url }}" class="img-fluid" alt="Image">
+                </a>
+              </figure>         
+              <a href="{{ product.get_absolute_url }}">
+                <p class="mb-0">{{ product.title }}</p>
+            
+              <div class="product-rating mb-0" id="product-rating">
+                <i class="icon-star{% if product.avaregereview < 1%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 2%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 3%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 4%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 5%}-o empty{% endif%}"></i>
+              </div>
+
+              <span class="text-muted text-center">${{ product.get_price }}
+                <span class="">/</span>
+                <span class="text-danger">{% trans "Add to Cart" %}</span>
+              </span></a>
+            </div>
+          </div>
+          {% endfor %}
+        </div><br><br>               
+      </div>
+    </section>
+    <!-- end latest products -->
+
+
+
+    <!-- most picked products -->
+    <section class="pt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center mb-3">
+            <h2>{% trans "Most Picked Products" %}</h2>
+          </div>
+        </div><br>
+        <div class="row gutter-2 gutter-md-3">
+          {% for product in products_picked %}
+          <div class="col-6 col-lg-3 text-center">
+            <div class="product">
+              <figure class="product-image">
+                <a href="{{ product.get_absolute_url }}">
+                  <img src="{{ product.featured.url }}" class='img-fluid' alt="Image">
+                </a>
+              </figure>         
+              <a href="{{ product.get_absolute_url }}">
+                <p class="mb-0">{{ product.title }}</p>
+            
+              <div class="product-rating mb-0" id="product-rating">
+                <i class="icon-star{% if product.avaregereview < 1%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 2%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 3%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 4%}-o empty{% endif%}"></i>
+                <i class="icon-star{% if product.avaregereview < 5%}-o empty{% endif%}"></i>
+              </div>
+
+              <span class="text-muted text-center">${{ product.get_price }}
+                <span class="">/</span>
+                <span class="text-danger">{% trans "Add to Cart" %}</span>
+              </span></a>
+            </div>
+          </div>
+          {% endfor %}
+        </div><br><br>               
+      </div>
+    </section>
+    
+    <!-- end most picked  products -->
+
+    <!-- <div class="site-section">
+      <div class="container">
+          <div class="row mb-5">
+              <div class="col-md-9 mb-4">
+                  <div class="row mb-5">
+                      {% for product in product %}
+                          <div class="col-sm-6 col-md-6 col-lg-4 mb-4" data-aos='fade-up'>
+                              <figure class="block-4-image">
+                                  <a href="{{ product.get_absolute_url }}"><img src="{{ product.featured.url }}" class="img-fluid"></a>
+                              </figure>
+  
+                              <div class="block-4-text p-4">
+                                  <a href="{{ product.get_absolute_url }}">
+                                      <h3>{{ product.title }}</h3>
+                                  </a>
+                                  <p class="mb-0">{{ product.description |truncatechars:34 }}</p>
+                              </div>
+                          </div>
+                      {% endfor %}
+                  </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <div class="border p-4 rounded mb-4">
+                      <h3 class="h6 text-uppercase text-black">Categories</h3>
+                      <ul>
+                          {% for category in categories %}
+                          <li class="mb-1">
+                              <a href="?category={{ category.name }}" class="d-flex">
+                                  <span>{{ category.name }}</span>
+                              </a>
+                          </li>
+                          {% endfor %}
+                      </ul>
+                </div>
+              </div> 
+          </div>
+      </div>
+    </div>  -->
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

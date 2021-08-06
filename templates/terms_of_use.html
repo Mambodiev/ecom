@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="bg-white py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-0">
+                <a href="{% url 'home' %}">{% trans "Home" %}</a>
+                <span class="mx-2 mb-0">/</span>
+                <strong class="text-black">{% trans "Terms of use" %}</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        {% for terms_of_use in terms_of_use %}
+        <div class="col-lg-8">
+            <h1 class="mb-2"></h1>
+            <p class="lead">{{ terms_of_use.terms_of_use_text|safe }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}
